@@ -360,7 +360,7 @@ def HistogramaComparacao(acertos_referencia, acertos_estudado,loteria,nome_figur
     # coloca o grid
     ax.set_axisbelow(True)
     ax.grid(True, ls='--')
-    
+
     ax.set_xlabel('Num. de Acertos')
     ax.set_ylabel('Probabilidade (%)')
     ax.set_ylim([0,100])
@@ -368,8 +368,6 @@ def HistogramaComparacao(acertos_referencia, acertos_estudado,loteria,nome_figur
     plt.title(nome_figura)
     plt.savefig("RESULTADOS/"+nome_figura)
     plt.show()
-
-
 
 
 def HistogramaAcertosErros(AcertosErros,nome_figura='AcertosErros.png'):
@@ -510,6 +508,14 @@ def Comparar_Vetores(item, concurso):
 
 ## ------------------------  PERSONALIZADO --------------------------------
 ## ------------------------  PERSONALIZADO --------------------------------
+def numero_da_linha_da_dezena(concursos):
+    T2  = (concursos[(concursos%10)!=0]/10).astype(int) # verifico em qual linha um numero pertence
+    T3 = (concursos[(concursos%10)==0]/10).astype(int) - 1 # dezenas {10,20,...,60} devem ser tratados separadamente
+    n_linhas = np.concatenate((T2,T3)) # junto em um vetor o numero de todas as linhas
+    return n_linhas
+
+
+
 def limpeza(vetor, itens_deletar):
 # (Input) vetor: um numpy array no qual deseja-se eliminar certos numeros
 # (Input) itens_deletar: numeros contidos em `vetor` que desejam ser eliminados.
